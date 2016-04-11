@@ -30,7 +30,7 @@ class Bulb:
                 return packet
             retries += 1
             if retries > self.max_retries:
-                print "Bulb did not respond"
+                print("Bulb did not respond")
                 return None
 
     def on(self):
@@ -65,7 +65,7 @@ class Bulb:
         if packet is not None:
             header, payload = packet.get_data()
             if payload is not None:
-                return payload.label.replace('\x00', '')
+                return payload.label.replace(b'\x00', b'')
         else:
             return None
 
@@ -74,7 +74,7 @@ class Bulb:
         if packet is not None:
             header, payload = packet.get_data()
             if payload is not None:
-                return payload.label.replace('\x00', '')
+                return payload.label.replace(b'\x00', b'')
         else:
             return None
 

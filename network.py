@@ -36,7 +36,7 @@ class Network:
                 if packet is not None:
                     header, payload = packet.get_data()
                     if header.code is PacketType.PAN_GATEWAY.code:
-                        print "Found: " + address[0] + "  MAC: " + "%x:%x:%x:%x:%x:%x" % unpack("BBBBBB", header.target)
+                        print("Found: {} MAC: {}".format(address[0], "%x:%x:%x:%x:%x:%x" % unpack("BBBBBB", header.target)))
                         self.bulbs.add(Bulb(ip=address[0], site=header.site, mac=header.target, connection=self.connection))
             except socket.timeout:
                 pass
@@ -46,12 +46,12 @@ class Network:
 
     def get_lights_by_tags(self, tag):
         for bulb in self.bulbs:
-            if bulb.get_tags() == label:
+            if bulb.get_tags().lower() == label.lower().encode('utf-8'):
                 return bulb
         return None
 
     def get_light_by_label(self, label):
         for bulb in self.bulbs:
-            if bulb.get_label() == label:
+            if bulb.get_label().lower() == label.lower().encode('utf-8'):
                 return bulb
         return None
